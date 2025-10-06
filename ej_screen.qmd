@@ -1,0 +1,33 @@
+---
+title: "Homework Assignment 1"
+subtitle: "Exploring Environmental (In)Justice: "
+author: "Jay Kim"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+library(stars)
+library(tmap)
+library(here)
+
+# read in EJScreen data
+ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb"))
+
+# filter to California
+california <- ejscreen %>%
+  dplyr::filter(ST_ABBREV == "CA") 
+
+# filter to a counties in Bay Area
+east_bay_ejscreen <- ejscreen %>%
+  dplyr::filter(CNTY_NAME %in% c("Alameda County", "Solano County", "Contra"))
+
+# find the average values for all variables within counties
+california_counties <- aggregate(california, by = list(california$CNTY_NAME), FUN = mean)
+```
+
+```{r}
+
+```
+
