@@ -1,8 +1,13 @@
 ---
 title: "Homework Assignment 1"
-subtitle: "Exploring Environmental (In)Justice: "
+subtitle: "Cancer Risk in California’s East Bay"
 author: "Jay Kim"
+execute: 
+  warning: false
+  echo: true
 format: html
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -11,23 +16,46 @@ library(sf)
 library(stars)
 library(tmap)
 library(here)
+tmap_mode("plot")
 
-# read in EJScreen data
+# Read in EJScreen data
 ejscreen <- sf::st_read(here::here("data", "ejscreen","EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb"))
 
-# filter to California
+# Filter to California
 california <- ejscreen %>%
-  dplyr::filter(ST_ABBREV == "CA") 
+  dplyr::filter(ST_ABBREV == "CA")
 
-# filter to a counties in Bay Area
+# Filter to a counties in Bay Area
 east_bay_ejscreen <- ejscreen %>%
-  dplyr::filter(CNTY_NAME %in% c("Alameda County", "Solano County", "Contra"))
+  dplyr::filter(CNTY_NAME %in% c("Alameda County", "Solano County", "Contra Costa County")) %>% 
+  st_transform(3310) # Project to meters for accurate scale
 
 # find the average values for all variables within counties
-california_counties <- aggregate(california, by = list(california$CNTY_NAME), FUN = mean)
+# california_counties <- aggregate(california, by = list(california$CNTY_NAME), FUN = mean)
 ```
 
 ```{r}
+east_bay_ejscreen
+```
+
+```{r}
+east_bay_ejscreen %>% 
+  st_drop_geometry() %>% 
+  summarize(mean_cancer = mean(CANCER, na.rm = TRUE),
+    mean_people_color = mean(PEOPCOLORPCT, na.rm = TRUE))
+```
+
+```{r}
+tm_shape(east_bay_ejscreen) +
+  tm_polygons(
+    col = "CANCER",
+    style = "quantile", n = 5,
+    palette = "viridis",
+    title = "Cancer Risk (per million)") +
+  tm_layout(title = "Cancer Risk from Air Toxics (East Bay Counties)",
+    legend.outside = TRUE, frame = FALSE) +
+  tm_scale_bar(position = c("left", "bottom")) +
+  tm_compass(type = "arrow", position = c("right", "top"))
 
 ```
 
