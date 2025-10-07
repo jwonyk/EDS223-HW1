@@ -24,8 +24,6 @@ pacman::p_load(tidyverse, sf, stars, tmap, here, viridisLite)
 ```
 
 ```{r}
-#| label: load-ejscreen
-#| cache: true
 #| message: false
 #| warning: false
 # Read in EJScreen data
@@ -82,8 +80,6 @@ map_p_cancer <- tm_shape(east_bay_ejscreen, bbox = bbox_eastbay) +
   tm_compass(type = "arrow", position = c("right", "top")) +
   tm_title("Cancer Risk from Air Toxics (East Bay Counties)")
 
-map_p_cancer
-
 tmap_save(map_p_cancer, 
           filename = here("output", "map_p_cancer.png"),
           width = 6, 
@@ -134,7 +130,6 @@ map_low_income <- tm_shape(east_bay_ejscreen, bbox = bbox_eastbay) +
   tm_compass(type = "arrow", position = c("right", "top")) +
   tm_title("Low-Income Residents (East Bay Counties)")
 
-map_low_income
 # Save map
 tmap_save(map_low_income,
           filename = here("output", "map_low_income.png"),
@@ -153,7 +148,6 @@ three_map <- tmap_arrange(map_p_cancer,
                         map_low_income,
                         ncol = 3, 
                         widths = c(1, 1, 1))
-three_map
 
 # Save map as PNG file
 tmap_save(three_map, 
