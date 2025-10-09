@@ -22,4 +22,4 @@ The project uses publicly archived data from the **EPA EJScreen,** loaded in usi
 
 ## References
 
-United States Environmental Protection Agency. 2015. EJSCREEN. Retrieved: October 15th, 2025, www.epa.gov/ejscreen.
+United States Environmental Protection Agency. 2015. EJSCREEN. Retrieved: October 05th, 2025, www.epa.gov/ejscreen.
