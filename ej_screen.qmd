@@ -24,12 +24,11 @@ pacman::p_load(tidyverse, sf, stars, tmap, here, viridisLite)
 ```
 
 ```{r}
-#| message: false
-#| warning: false
 # Read in EJScreen data
-ejscreen <- sf::st_read(here::here("data", 
+ejscreen <- sf::st_read(here::here("data",
                                    "ejscreen",
-                                   "EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb"))
+                                   "EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb"),
+                        quiet = TRUE)
 
 # Filter to California
 california <- ejscreen %>%
@@ -43,23 +42,29 @@ east_bay_ejscreen <- ejscreen %>%
 
 # Save the subset as a new `gpkg` file
 st_write(california, 
-         here("data", "ejscreen", "california.gpkg"), 
-         delete_dsn = TRUE)
+         here("data", 
+              "ejscreen", 
+              "california.gpkg"),
+         quiet = TRUE)
 st_write(east_bay_ejscreen, 
-         here("data", "ejscreen", "east_bay_ejscreen.gpkg"), 
-         delete_dsn = TRUE)
+         here("data", 
+              "ejscreen", 
+              "east_bay_ejscreen.gpkg"),
+         quiet = TRUE)
 ```
 
 ```{r}
 # Read subsetted data that's been saved as `gpkg` files
 california <- st_read(here("data", 
                            "ejscreen", 
-                           "california.gpkg")) %>% 
+                           "california.gpkg"),
+                      quiet = TRUE) %>% 
   st_transform(3857)
 
 east_bay_ejscreen <- st_read(here("data", 
                                   "ejscreen", 
-                                  "east_bay_ejscreen.gpkg")) %>% 
+                                  "east_bay_ejscreen.gpkg"),
+                             quiet = TRUE) %>% 
   drop_na("P_D2_CANCER") %>% 
   st_transform(3310)
 ```
