@@ -10,6 +10,7 @@ This repository is analyzing patterns of **cancer risk due to toxicity in the ai
 .
 ├── data
 │   └── ejscreen
+│   │   ├── EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb
 ├── EDS223-HW1.Rproj
 ├── ej_screen.qmd
 ├── output
@@ -19,6 +20,14 @@ This repository is analyzing patterns of **cancer risk due to toxicity in the ai
 ## Data Access
 
 The project uses publicly archived data from the **EPA EJScreen,** loaded in using `sf` package
+
+## Authorship
+
+This repository is for the EDS - 223
+
+-   The project author: **Jay Kim**
+-   Instructor: **Annie Adams**
+-   Teaching Assistant: **Ale Vidal Meza**
 
 ## References
 

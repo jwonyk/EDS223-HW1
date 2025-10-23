@@ -2,10 +2,12 @@
 title: "Homework Assignment 1"
 subtitle: "Cancer Risk in California’s East Bay"
 author: "Jay Kim"
+date: "October 6, 2025"
 execute: 
   echo: true
   warning: false
-  message: false 
+  message: false
+  output: false
 format: pdf
 ---
 
@@ -20,7 +22,7 @@ This project will use maps to illustrate the following:
 
 ```{r}
 # Load in all the Necessary Packages for upcoming tasks
-pacman::p_load(tidyverse, sf, stars, tmap, here, viridisLite)
+pacman::p_load(tidyverse, sf, stars, tmap, here, viridisLite, RColorBrewer)
 ```
 
 ```{r}
@@ -77,8 +79,9 @@ tmap_mode("plot")
 
 # Plotting a spatial object
 map_p_cancer <- tm_shape(east_bay_ejscreen, bbox = bbox_eastbay) +
-  tm_polygons(fill = "P_D2_CANCER", 
-              fill.scale = tm_scale(values = viridis(5)),
+  tm_polygons(fill = "P_D2_CANCER",
+              palette = "YlOrRd",
+              style = "cont",
               fill.legend = tm_legend(title = "Percentile for Cancer Risk")) +
   tm_layout(legend.outside = TRUE, frame = FALSE) +
   tm_scalebar(position = c("left", "bottom")) +
@@ -102,7 +105,8 @@ tmap_mode("plot")
 # Plotting a spatial object
 map_p_poc <- tm_shape(east_bay_ejscreen, bbox = bbox_eastbay) +
   tm_polygons(fill = "P_PEOPCOLORPCT",
-              fill.scale  = tm_scale(values = magma(5)),
+              palette = "-Purples",
+              style = "cont",              
               fill.legend = tm_legend(
                 title = "Percentile for People of Color")) +
   tm_layout(legend.outside = TRUE, frame = FALSE) +
@@ -127,7 +131,8 @@ tmap_mode("plot")
 # Plotting a spatial object for Low-Income Percentage
 map_low_income <- tm_shape(east_bay_ejscreen, bbox = bbox_eastbay) +
   tm_polygons(fill = "P_LOWINCPCT",
-              fill.scale  = tm_scale(values = "-inferno"),
+              palette = "-Blues",
+              style = "cont",              
               fill.legend = tm_legend(
                 title = "Percentile for Low-Income Population")) +
   tm_layout(legend.outside = TRUE, frame = FALSE) +
