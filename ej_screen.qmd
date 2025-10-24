@@ -7,9 +7,10 @@ execute:
   echo: true
   warning: false
   message: false
-  output: false
-format: pdf
+format: html
 ---
+
+## Introduction
 
 Have you ever been to the Bay Area? San Francisco? San Jose? These are much more popular destinations. I would like to discuss a part of the Bay Area that is not as glamorous and somewhat removed from the tech bubble.
 
@@ -19,6 +20,8 @@ This project will use maps to illustrate the following:
 2.  Plot and render a map that shows the East Bay, which consists of Alameda, Contra Costa, and Solano Counties
 3.  Understand the plots as we examine them together
 4.  We will explore the lifetime health risks associated with air quality, demographics (including people of color), and socioeconomic levels.
+
+## Initial Setup
 
 ```{r}
 # Load in all the Necessary Packages for upcoming tasks
@@ -70,6 +73,8 @@ east_bay_ejscreen <- st_read(here("data",
   drop_na("P_D2_CANCER") %>% 
   st_transform(3310)
 ```
+
+## Maps
 
 ```{r}
 bbox_eastbay <- st_bbox(east_bay_ejscreen)
@@ -171,3 +176,7 @@ tmap_save(three_map,
 The maps below convey a spatial relationship between race, income, and environmental vulnerability across East Bay counties in California. Areas with higher percentages of people of color and the low-income population overlap with regions that have elevated cancer risk. The environmental burden is disproportionately heavier in the places where marginalized communities are, related to their socioeconomic status and racial composition. The map clarifies how environmental injustice occurs in the local vicinity of all other areas, except retirement communities in the northern part of the East Bay.
 
 ![Comparison of three maps](output/three_map.png)
+
+## README
+
+![Screenshot of README](output/readme_screenshot.png){fig-align="center"}
