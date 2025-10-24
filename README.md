@@ -10,7 +10,9 @@ This repository is analyzing patterns of **cancer risk due to toxicity in the ai
 .
 ├── data
 │   └── ejscreen
-│   │   ├── EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb
+│       ├── california.gpkg
+│       ├── east_bay_ejscreen.gpkg
+│       ├── EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb
 ├── EDS223-HW1.Rproj
 ├── ej_screen.qmd
 ├── output
